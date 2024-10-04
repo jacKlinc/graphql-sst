@@ -16,6 +16,9 @@ export function ExampleStack({ app, stack }: StackContext) {
     fields: {
       userId: "string",
       noteId: "string",
+      content:  "string",
+      attachment: "string", // Parsed from request body
+      createdAt: "string", // Current Unix timestamp
     },
     primaryIndex: { partitionKey: "userId" },
   });
