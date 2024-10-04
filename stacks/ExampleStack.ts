@@ -5,7 +5,9 @@ export function ExampleStack({ app, stack }: StackContext) {
   // create the http api
   const httpApi = new Api(stack, "api", {
     routes: {
-      "get /notes": "packages/functions/src/list.main",
+      "get /list": "packages/functions/src/list.handler",
+      "get /read": "packages/functions/src/get.handler",
+      "post /create": "packages/functions/src/create.handler",
     },
   });
 
@@ -22,5 +24,6 @@ export function ExampleStack({ app, stack }: StackContext) {
   stack.addOutputs({
     apiendpoint: httpApi.url,
     tableName: notesTable.tableName,
+    notesTableName: notesTable.tableName,
   });
 }

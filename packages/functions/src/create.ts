@@ -3,16 +3,12 @@ import { APIGatewayProxyEvent } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
+import { sendHttp } from "./utils";
+
 const dynamoDb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
 
-const sendHttp = (statusCode: number, message: object): { statusCode: number, body: string } => {
-    return {
-        statusCode,
-        body: JSON.stringify(message),
-    };
-}
 
-export async function main(event: APIGatewayProxyEvent) {
+export async function handler(event: APIGatewayProxyEvent) {
     if (!event.body) {
         return sendHttp(404, { error: true })
     }
